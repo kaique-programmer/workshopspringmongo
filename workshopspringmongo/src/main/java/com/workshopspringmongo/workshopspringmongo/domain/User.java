@@ -1,12 +1,18 @@
 package com.workshopspringmongo.workshopspringmongo.domain;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Document(collection = "user")
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String id, name, email;
+    @Id
+    private String id;
+    private String name, email;
 
     public User(){}
 
