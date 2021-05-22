@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,14 +30,16 @@ public class UserService {
         return userRepository.insert(user);
     }
 
-    /*private void update(User user) {
-
+    public User update(User user) {
+        User domain = userRepository.findById(user.getId()).get();
+        updateData(domain, user);
+        return userRepository.save(domain);
     }
 
-    private void updateData(User entity, User user) {
-        entity.setName(user.getName());
-        entity.setEmail(user.getEmail());
-    }*/
+    private void updateData(User domain, User user) {
+        domain.setName(user.getName());
+        domain.setEmail(user.getEmail());
+    }
 
     public void delete(String id) {
         findById(id);
