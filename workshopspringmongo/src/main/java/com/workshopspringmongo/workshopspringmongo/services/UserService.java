@@ -29,6 +29,20 @@ public class UserService {
         return userRepository.insert(user);
     }
 
+    /*private void update(User user) {
+
+    }
+
+    private void updateData(User entity, User user) {
+        entity.setName(user.getName());
+        entity.setEmail(user.getEmail());
+    }*/
+
+    public void delete(String id) {
+        findById(id);
+        userRepository.deleteById(id);
+    }
+
     public User fromDTO(UserDTO userDTO) {
         return new User(userDTO.getId(), userDTO.getName(), userDTO.getEmail());
     }
