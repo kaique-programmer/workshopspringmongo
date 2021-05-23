@@ -1,5 +1,6 @@
 package com.workshopspringmongo.workshopspringmongo.resources;
 
+import com.workshopspringmongo.workshopspringmongo.domain.Post;
 import com.workshopspringmongo.workshopspringmongo.domain.User;
 import com.workshopspringmongo.workshopspringmongo.dto.UserDTO;
 import com.workshopspringmongo.workshopspringmongo.services.UserService;
@@ -54,6 +55,12 @@ public class UserResource {
     public ResponseEntity<Void> delete(@PathVariable String id) {
         userService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @RequestMapping(value = "/{id}/posts", method = RequestMethod.GET)
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+        User user = userService.findById(id);
+        return ResponseEntity.ok().body(user.getPosts());
     }
 
 }
