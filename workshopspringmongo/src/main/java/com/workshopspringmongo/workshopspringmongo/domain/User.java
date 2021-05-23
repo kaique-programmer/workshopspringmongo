@@ -1,9 +1,12 @@
 package com.workshopspringmongo.workshopspringmongo.domain;
 
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Document(collection = "user")
@@ -13,6 +16,9 @@ public class User implements Serializable {
     @Id
     private String id;
     private String name, email;
+
+    @DBRef(lazy = true)
+    private List<Post> posts = new ArrayList<>();
 
     public User(){}
 
@@ -44,6 +50,14 @@ public class User implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 
     @Override
